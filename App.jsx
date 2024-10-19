@@ -1,29 +1,72 @@
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, Button, TextInput } from "react-native";
+import { useState } from "react";
 
 export default function App() {
-  <div></div>;
+  const [enteredGoal, setEnteredGoal] = useState("");
+  const [courseGoals, setCourseGoals] = useState([]);
+
+  function goalInputHandler(enteredText) {
+    setEnteredGoal(enteredText);
+  }
+  function addGoalHandler() {
+    setCourseGoals((currentCourseGoals) => [
+      ...currentCourseGoals,
+      enteredGoal,
+    ]);
+  }
   return (
-    <View style={styles.container}>
-      <View>
-        <Text style={styles.dummyText}>Hello World!!</Text>
+    <View style={styles.appContainer}>
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.textInput}
+          onChangeText={goalInputHandler}
+          placeholder="추가할 목표"
+        />
+        <Button title="Add Goal" onPress={addGoalHandler} />
       </View>
-      <Text style={styles.dummyText}>Hello World22222!!</Text>
-      <Button title="여기에 버튼이름" />
+      <View style={styles.goalsContainer}>
+        {courseGoals.map((goal) => (
+          <View style={styles.goalItem} key={goal}>
+            <Text style={styles.goalText}>{goal}</Text>
+          </View>
+        ))}
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  appContainer: {
+    paddingTop: 50,
+    paddingHorizontal: 16,
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
   },
-  dummyText: {
-    margin: 16,
-    borderWidth: 2,
-    borderColor: "blue",
-    padding: 16,
+  inputContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 24,
+    borderBottomWidth: 1,
+    borderBottomColor: "#cccccc",
+  },
+  textInput: {
+    borderColor: "#cccccc",
+    borderWidth: 1,
+    padding: 5,
+    width: "70%",
+    marginRight: 8,
+  },
+  goalsContainer: {
+    flex: 5,
+  },
+  goalItem: {
+    margin: 8,
+    padding: 8,
+    borderRadius: 6,
+    backgroundColor: "#5e0acc",
+  },
+  goalText: {
+    color: "white",
   },
 });
