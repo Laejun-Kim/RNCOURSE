@@ -21,10 +21,18 @@ const GoalInput = ({ onAddGoal, isVisible, onCancel }) => {
     setEnteredGoal("");
   }
 
+  console.log("goalinput component rendered");
+  console.log("이게 어디에 나오는거지>>이 모달이 렌더링 될때 뜨는 로그구나");
+  // console.log(enteredGoal);
+
   return (
     <Modal visible={isVisible} animationType="slide">
       <View style={styles.inputContainer}>
-        <Image source={require("../assets/target.png")} style={styles.image} />
+        <Image
+          // source={require("../assets/target.png")}
+          source="../assets/tarddddget.png"
+          style={styles.image}
+        />
         <TextInput
           style={styles.textInput}
           onChangeText={goalInputHandler}
